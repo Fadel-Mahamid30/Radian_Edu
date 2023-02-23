@@ -18,10 +18,33 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nama',
-        'email',
-        'password',
-        'no_telepon'
+        "nama",
+        "email",
+        "password",
+        "no_telepon",
+        "foto",
+        "cv",
+        "tanggal_lahir",
+        "jenis_kelamin",
+        "dari_pendidikan",
+        "sampai_pendidikan",
+        "universitas",
+        "deskripsi_pendidikan",
+        "asal_ptn",
+        "jurusan",
+        "ipk",
+        "provinsi",
+        "kabupaten",
+        "kecamatan",
+        "alamat",
+        "posisi_dilamar",
+        "deskripsi_diri",
+        "kegiatan_mengajar",
+        "harga",
+        "is_micro_teaching_complete",
+        "status",
+        "top_star",
+        "is_profile_complete"
     ];
 
     /**
@@ -30,8 +53,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        "password",
+        "remember_token",
     ];
 
     /**
@@ -40,10 +63,22 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        "email_verified_at" => "datetime",
     ];
 
-    public function user(){
-        return $this->hasOne(Confirm::class, "user_id");
+    public function kegiatan(){
+        return $this->hasMany(Activity::class, "user_id");
+    }
+
+    public function pengalaman(){
+        return $this->hasMany(Experience::class, "user_id");
+    }
+    
+    public function minat_mengajar(){
+        return $this->hasMany(InterestTeaching::class, "user_id");
+    }
+
+    public function domisili_mengajar(){
+        return $this->hasMany(TeachingDomicile::class, "user_id");
     }
 }

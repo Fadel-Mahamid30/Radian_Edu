@@ -21,8 +21,8 @@ return new class extends Migration
                 ->on('districts')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->unsignedBigInteger('biodata_id');
-            $table->foreign('biodata_id')->references('id')->on('biodatas')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

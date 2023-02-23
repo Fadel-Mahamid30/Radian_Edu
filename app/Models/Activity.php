@@ -10,15 +10,11 @@ class Activity extends Model
     use HasFactory;
 
     protected $fillable = [
-        "aktivitas",
-        "biodata_id",
-        
-        // hanya digunakan sebagai session untuk step form biodata 
-        "aktivitas_lainnya",
-        "lainnya",
+        "kegiatan",
+        "user_id",
     ];
 
-    public function biodata(){
-        return $this->belongsTo(Biodata::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class experimentController extends Controller
 {
@@ -29,4 +32,23 @@ class experimentController extends Controller
 
         return $request->all();
     }
+
+    public function removeUser($id){
+        $cek = User::findOrFail($id);
+
+        if ($cek) {
+            if($cek->foto && $cek->cv){
+                Storage::delete($cek->foto);
+                Storage::delete($cek->cv);
+            }
+
+            $cek->delete();
+            return "hapus berhasil";
+        }else{
+            return "hapus gagal";
+        }
+    }
+
+    
+
 }

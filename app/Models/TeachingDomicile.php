@@ -11,11 +11,15 @@ class TeachingDomicile extends Model
 
     protected $fillable = [
         "kecamatan_id",
-        "boiodata_id"
+        "user_id",
     ];
 
-    
-    public function district(){
+
+    public function kecamatan(){
         return $this->belongsTo(District::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

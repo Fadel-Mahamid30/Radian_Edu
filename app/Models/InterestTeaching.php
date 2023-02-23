@@ -11,14 +11,14 @@ class InterestTeaching extends Model
 
     protected $fillable = [
         "mata_pelajaran_id",
-        "biodata_id"
+        "user_id"
     ];
 
     public function mata_pelajaran(){
         return $this->belongsTo(Subjects::class);
     }
 
-    public function biodata(){
-        return $this->belongsTo(Biodata::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

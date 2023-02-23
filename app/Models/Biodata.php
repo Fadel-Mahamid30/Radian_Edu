@@ -14,6 +14,10 @@ class Biodata extends Model
         "cv",
         "tanggal_lahir",
         "jenis_kelamin",
+        "dari_pendidikan",
+        "sampai_pendidikan",
+        "universitas",
+        "deskripsi_pendidikan",
         "asal_ptn",
         "jurusan",
         "ipk",
@@ -25,26 +29,27 @@ class Biodata extends Model
         "deskripsi_diri",
         "kegiatan_mengajar",
         "harga",
-        "user_id"  
+        // "user_id",
+        "aktivitas"
     ];
 
-    public function aktivitas(){
-        return $this->hasMany(Activity::class, "biodata_id");
-    }
+    // public function aktivitas(){
+    //     return $this->hasMany(Activity::class, "biodata_id");
+    // }
 
-    public function pengalaman(){
-        return $this->hasMany(Experience::class, "biodata_id");
-    }
+    // public function pengalaman(){
+    //     return $this->hasMany(Experience::class, "biodata_id");
+    // }
     
-    public function pendidiakn(){
-        return $this->hasOne(Education::class, "biodata_id");
-    }
+    // public function pendidiakn(){
+    //     return $this->hasOne(Education::class, "biodata_id");
+    // }
     
-    public function minat_mengajar(){
-        return $this->hasMany(InterestTeaching::class, "biodata_id");
-    }
+    // public function minat_mengajar(){
+    //     return $this->hasMany(InterestTeaching::class, "biodata_id");
+    // }
 
-    public function domisili_mengajar(){
-        return $this->hasMany(TeachingDomicile::class, "biodata_id");
-    }
+    // public function domisili_mengajar(){
+    //     return $this->hasMany(TeachingDomicile::class, "biodata_id");
+    // }
 }

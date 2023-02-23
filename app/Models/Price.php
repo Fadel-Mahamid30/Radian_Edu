@@ -10,8 +10,9 @@ class Price extends Model
     use HasFactory;
 
     protected $fillable = [
-        "kebupaten_id",
-        "harga"
+        "max_harga",
+        "min_harga",
+        "keuntungan"
     ];
 
     

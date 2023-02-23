@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
+
+    // merupakan sebuah variable yang menampung pesan yang akan di keluarkan ketika inputan error.
     protected $massage = [
         "nama.required" => "Kolom nama harus diisi.",
         "nama.max" => "Karakter yang di inputkan terlalu banyak.",
@@ -28,17 +30,19 @@ class RegisterController extends Controller
         "password.max" => "Karakter yang di inputkan terlalu banyak."
     ];
 
-    public function index(){
+    // fungsi yang digunakan untuk menampilkan form registrasi
+    public function form_registrasi(){
         return view("auth.register", [
             "title" => "Register"
         ]);
     }
 
-    public function store(Request $request){
+    // fungsi yang digunakan untuk melakukan registrasi
+    public function create_user(Request $request){
 
         $validate = $request->validate([
-            "nama" => "required|max:100",
-            "email" => "required|max:100|unique:users|email:dns",
+            "nama" => "required|max:255",
+            "email" => "required|max:100|unique:users|email",
             "no_telepon" => "required|min:11|numeric|unique:users",
             "password" => "required|min:6|max:255"
         ], $this->massage);
@@ -53,15 +57,12 @@ class RegisterController extends Controller
                 "password" => $password
             ]);
 
-            Confirm::create([
-                "user_id" => $user->id
-            ]);
-
-            return redirect()->route("login")->with("success", "Regiter berhasil, sekarang anda bisa login");
+            return redirect()->route("login")->with("success", "Registrasi berhasil, sekarang anda bisa login");
 
         } catch (\Throwable $th) {
-            // return response()->json("failed".$th);
-            return redirect()->route("register")->with("failed", "Regitrasi gagal, mohon untuk register ulang.");
+
+            return redirect()->route("register")->with("failed", "Registrasi gagal, mohon untuk registrasi ulang.");
+            
         }
 
     }

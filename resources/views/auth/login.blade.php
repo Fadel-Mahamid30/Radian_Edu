@@ -28,7 +28,7 @@
               <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
             </div>
             <button type="submit" class="mb-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            <a href="/register" class="w-full text-sm font-semibold flex justify-center text-blue-500">Register</a>
+            <a href="{{ route('registrasi') }}" class="w-full text-sm font-semibold flex justify-center text-blue-500">Register</a>
         </form>
     </div>
 

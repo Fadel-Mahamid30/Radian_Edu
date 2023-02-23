@@ -7,23 +7,25 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index(){
+    // fungsi yang digunakan untuk menampilkan form login
+    public function form_login(){
         return view("auth.login", [
             "title" => "Login"
         ]);
     }
 
-    public function login(Request $request){
+    // fungsi yang digunakan untuk melakukan login
+    public function authentication(Request $request){
 
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => ['required', 'email', 'max:100'],
+            'password' => ['required', "min:6"],
         ]);
  
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1])) {
             $request->session()->regenerate();
  
-            return redirect()->intended('home');
+            return redirect()->intended('/profile');
         }
  
         return back()->withErrors([

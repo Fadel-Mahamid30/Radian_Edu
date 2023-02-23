@@ -12,8 +12,8 @@
           Halaman Utama
       </h1>
       <div class="flex flex-row item-center justify-between w-[210px]">
-        <a href="/login" class="px-5 py-2 rounded-lg bg-blue-500 text-2xl w-auto h-auto text-white">Login</a>
-        <a href="/register" class="px-5 py-2 rounded-lg bg-blue-500 text-2xl w-auto h-auto text-white">Daftar</a>
+        <a href="{{ route('login') }}" class="px-5 py-2 rounded-lg bg-blue-500 text-2xl w-auto h-auto text-white">Login</a>
+        <a href="{{ route('registrasi') }}" class="px-5 py-2 rounded-lg bg-blue-500 text-2xl w-auto h-auto text-white">Daftar</a>
       </div>
     </div>
   </section>

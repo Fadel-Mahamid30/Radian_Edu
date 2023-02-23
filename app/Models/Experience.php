@@ -10,14 +10,14 @@ class Experience extends Model
     use HasFactory;
 
     protected $fillable = [
-        "mulai_pengalaman",
+        "dari_pengalaman",
         "sampai_pengalaman",
-        "lembaga",
+        "perusahaan",
         "deskripsi_pengalaman",
-        "biodata_id"
+        "user_id"
     ];
 
-    public function biodata(){
-       return $this->belongsTo(Biodata::class);
+    public function user(){
+       return $this->belongsTo(User::class);
     }
 }

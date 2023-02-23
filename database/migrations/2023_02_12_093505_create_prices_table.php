@@ -15,13 +15,9 @@ return new class extends Migration
     {
         Schema::create('prices', function (Blueprint $table) {
             $table->id();
-            $table->char('kabupaten_id', 4);
-            $table->foreign('kabupaten_id')
-                ->references('id')
-                ->on('regencies')
-                ->onUpdate('cascade')->onDelete('cascade');
-        
-            $table->unsignedBigInteger("harga");
+            $table->unsignedBigInteger('min_harga');
+            $table->unsignedBigInteger('max_harga');
+            $table->integer('keuntungan');
             $table->timestamps();
         });
     }
