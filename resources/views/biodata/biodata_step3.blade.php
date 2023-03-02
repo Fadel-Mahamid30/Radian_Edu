@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('biodata.layout.template')
 @section('content')
 
 <section class="min-h-screen font-poppins flex justify-center items-center">

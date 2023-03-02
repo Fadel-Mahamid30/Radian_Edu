@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ApiController extends Controller
 {
 
-    // untuk select domisili pada form biodata 1 dan select domisili mengajar pada form biodata 2
+    // untuk select domisili pada form biodata 2 dan select domisili mengajar pada form biodata 2
     public function getkabupaten(Request $request){
         $get_kabuptan = DB::table("provinces")
                         ->join("regencies", "provinces.id", "=", "regencies.province_id")
@@ -19,7 +19,7 @@ class ApiController extends Controller
         return response()->json($get_kabuptan);
     }
 
-    // untuk select domisili pada form biodata 1
+    // untuk select domisili pada form biodata 2
     public function getkecamatan(Request $request){
         $get_kecamatan = DB::table("regencies")
                         ->join("districts", "regencies.id", "=", "districts.regency_id")
@@ -29,7 +29,7 @@ class ApiController extends Controller
         return response()->json($get_kecamatan);
     }
 
-    // untuk select kabupaten pada domisili mengajar
+    // untuk select kabupaten pada domisili mengajar pada form biodata 2
     public function getkabupatenMengajar(Request $request){
         $get_kabuptan = DB::table("provinces")
                         ->join("regencies", "provinces.id", "=", "regencies.province_id")
@@ -39,7 +39,7 @@ class ApiController extends Controller
         return response()->json($get_kabuptan);
     }
 
-    // untuk select kecamatan pada domisili mengajar
+    // untuk select kecamatan pada domisili mengajar pada form biodata 2
     public function getAllDataDomicile(Request $request){
         $get_data = DB::table("provinces")
                         ->join("regencies", "provinces.id", "=", "regencies.province_id")
@@ -61,4 +61,28 @@ class ApiController extends Controller
         return response()->json($get_mapel);
     }
     
+    public function getdomisili_mengajar(Request $request){
+
+        $domisili = DB::table("provinces")
+                ->join("regencies", "provinces.id", "=", "regencies.province_id")
+                ->join("districts", "regencies.id", "=", "districts.regency_id")
+                ->select("provinces.name as provinsi" ,"regencies.name as kabupaten", "districts.name as kecamatan", "districts.id as kecamatan_id")
+                ->where("provinces.name", "like", "%" . request("q") . "%")
+                ->orWhere("regencies.name", "like", "%" . request("q") . "%")
+                ->orWhere("districts.name", "like", "%" . request("q") . "%")
+                ->paginate("30");
+
+        return response()->json($domisili);
+    }
+
+    public function getminat_mengajar(Request $request){
+        $mapel = DB::table("educational_levels")
+                ->join("subjects", "educational_levels.id", "=", "subjects.tingkatan_id")
+                ->select("educational_levels.tingkatan as tingkatan","subjects.id as mapel_id", "subjects.mata_pelajaran as mata_pelajaran")
+                ->where("educational_levels.tingkatan", "like", "%" . request("q") . "%")
+                ->orWhere("subjects.mata_pelajaran", "like", "%" . request("q") . "%")
+                ->paginate(20);
+
+        return response()->json($mapel);
+    }
 }

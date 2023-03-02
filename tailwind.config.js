@@ -23,7 +23,8 @@ module.exports = {
         "placeholder" : "#a3a3a3",
         "primaryInp" : "#c2c2c2",
         "light_blue" : "#f2f5ff",
-        "primaryYellow" : "#ffb200"
+        "primaryYellow" : "#ffb200",
+        "footer" : "#F8FAFC",
       },
       screens: {
         'notebook': '930px',

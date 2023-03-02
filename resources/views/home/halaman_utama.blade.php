@@ -7,15 +7,23 @@
             <img src="img/logo.png" alt="" class="px-4 py-2">
         </div>
         <div class="px-4 flex pt-4">
-            <button class="text-sm font-medium border border-secondary bg-secondary px-4 py-2 text-center text-dark rounded-lg ml-7" href="#">Temukan Guru</button>
-            <button class="text-sm font-medium border border-secondary bg-secondary px-4 py-2 text-center text-dark rounded-lg ml-4" href="#">Daftar Sebagai Guru</button>
+            <button class="text-sm font-medium border border-secondary bg-primaryYellowary px-4 py-2 text-center text-dark rounded-lg ml-7" href="#">Temukan Guru</button>
+            <button class="text-sm font-medium border border-secondary bg-primaryYellowary px-4 py-2 text-center text-dark rounded-lg ml-4" href="#">Daftar Sebagai Guru</button>
         </div>
         <div class="pt-4 block absolute text-right right-4">
-            <button class="text-primary text-sm font-semibold text-center px-4 py-2">
-                <a href="{{ route('registrasi') }}">Daftar</a> </button>
-            <button class="text-white font-semibold text-sm border border-black bg-primary px-4 py-2 rounded-lg ml-4 justify-items-end">
-                <a href="{{ route('login') }}">Masuk</a>
-            </button>
+            @auth
+                <a href="{{ route('profile') }}" class="flex flex-row items-center">
+                    <p class="text-black text-base font-semibold mr-2">{{ auth()->user()->nama }}</p>
+                    <div style="background-image: url({{ asset('storage/' . auth()->user()->foto) }})" class="bg-cover bg-top w-[40px] h-[40px] mr-0 8x75:mr-7 overflow-hidden items-center justify-center rounded-full"></div>
+                </a>
+            @endauth
+            @guest
+                <button class="text-primary text-sm font-semibold text-center px-4 py-2">
+                    <a href="{{ route('registrasi') }}">Daftar</a> </button>
+                <button class="text-white font-semibold text-sm border border-black bg-primary px-4 py-2 rounded-lg ml-4 justify-items-end">
+                    <a href="{{ route('login') }}">Masuk</a>
+                </button>
+            @endguest
         </div>
     </header>
     <!-- navbar 1 section end -->
@@ -116,7 +124,7 @@
         <div class="container">
             <div class="flex flex-wrap">
                 <div class="w-full self-center px-4 lg:w-1/2">
-                    <button class="border bg-second rounded-full mb-6 py-3 px-8">
+                    <button class="border bg-primaryYellow rounded-full mb-6 py-3 px-8">
                         <h5 class="text-lg font-semibold text-dark md:text-lg">LES PRIVATE & BIMBEL</h5>
                     </button>
                     <h1 class="font-bold text-dark text-3xl mt-1 ">SIAPKAN DIRI BERSAMA YANG AHLI</h1>
@@ -470,260 +478,94 @@
                 
                 <div class="w-full pl-4 pr-0 lg:w-1/2 right-0">
                     <h4 class="font-normal text-lg mr-16 text-body mb-3">Ayo tulis tutor semau kamu, biar kami yang bantu carikan!</h4>
-                        <div class="flex flex-wrap">
-                            <div class="w-full flex px-4 mb-10 lg:w-1/3">
-                                <form action="" class="w-full max-w-lg">
+                        <form action="{{ route('daftar.guru') }}" method="GET" class="w-full flex flex-row">
+                            <div class="w-full flex px-4 mb-2 ">
+                                <div class="w-full max-w-lg">
                                     <div class="relative flex text-text border border-body rounded-lg">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute ml-3 self-center" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                           </svg>
-                                        <input type="text" name="text" placeholder="Mata Pelajaran" autocomplete="off" aria-label="Mata Pelajaran" class="w-full py-3 pl-10 font-normal rounded-lg">
+                                        <input type="text" name="mata_pelajaran" placeholder="Mata Pelajaran" autocomplete="off" aria-label="Mata Pelajaran" class="w-full py-3 pl-10 font-normal rounded-lg">
                                     </div>
-                                </form>
+                                </div>
                             </div>
 
-                            <div class="w-full flex px-4 mb-10 lg:w-1/3">
-                                <form action="" class="w-full max-w-lg">
-                                    <div class="relative flex text-text border border-body rounded-lg py-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute ml-3 self-center" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <div class="w-full flex px-4 mb-2 ">
+                                <div class="w-full max-w-lg">
+                                    <div class="relative flex text-text border border-body rounded-lg">
+                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute ml-3 self-center" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                         </svg>
-                                        <input type="text" name="text" placeholder="Daerah" autocomplete="off" aria-label="Daerah" class="w-full pl-10 font-normal rounded-lg">
+                                        <input type="text" name="domisili" placeholder="Mata Pelajaran" autocomplete="off" aria-label="Domisili" class="w-full py-3 pl-10 font-normal rounded-lg">
                                     </div>
-                                </form>
+                                </div>
                             </div>
 
-                            <div class="w-full flex px-4 mb-10 lg:w-1/3">
-                                <button class="text-base font-normal text-white p-4 bg-primary rounded-lg" href="#">Cari</button>
+                            <div class="w-full flex px-4 mb-2 ">
+                                <button type="submit" class="text-base font-normal text-white p-4 bg-primary rounded-lg">Cari</button>
                             </div>
-                        </div>
+                        </form>
                         
                             
                 </div>
                 
             </div>
+            
 
             <div class="flex flex-wrap">
-                <div class="w-full px-4 mb-10 lg:w-1/4">
-                   <div class="bg-white card rounded-2xl overflow-hidden relative group w-[253px] h-[348px]">
-                    <div class="h-[348px] transition-all transform" style="background-image: url(img/re1.png);">
-                        <div class="bg-second h-[98px] rounded-2xl absolute inset-x-0 bottom-0 text-center">
-                            <h1 class="text-xl font-medium text-black mb-2">Angelia</h1>
-                            <h5 class="text-lg font-normal text-black mb-0">Bahasa Inggris - Depok</h5>
-                            <h5 class="text-lg font-normal text-black mb-3">Universitas Indonesia</h5>
-                        </div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 w-full"></div>
-                    <div class="absolute z-0 inset-0 bg-second opacity-0 group-hover:opacity-95 transition-all"></div>
-                    <div class="group-hover:-translate-y-3 group-hover:bottom-0 transition-all absolute button-0 left-0 text-black p-4 justify-center content-center">
-                        <h4 class="font-medium mb-1 text-xl text-center opacity-80">Angelina</h4>
-                        <h3 class="font-normal mb-0 text-lg text-center">Bahasa Inggris - Depok</h3>
-                        <h3 class="font-normal mb-3 text-lg text-center">Universitas Indonesia</h3>
-                        <div class="justify-center mx-12">
-                            
-                              <button class="transition-all text-sm inline-flex rounded-xl mb-28 px-2 py-2 text-center justify-center border border-primary bg-primary" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentcolor">
-                                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                                  </svg>
-                                Rp. 100.000
-                              </button>
-                        </div> 
-                    </div>
-                </div>
-                </div>
+                {{-- menampilkan data tutor (yang sudah microteaching) --}}
+                @isset ($guru)
+                    @foreach ($guru as $row)
+                    <div class="w-full px-4 mb-10 lg:w-1/4">
+                        <div class="bg-white card rounded-2xl overflow-hidden relative group w-[253px] h-[348px]">
+                         <div class="h-[348px] transition-all transform bg-cover bg-top" style="background-image: url({{ asset('storage/'. $row->foto) }});">
+                             <div class="bg-primaryYellow h-[98px] rounded-2xl absolute inset-x-0 bottom-0 text-center">
+                                 <h1 class="text-xl font-medium text-black mb-2">{{ $row->nama }}</h1>
+                                 
+                                 {{-- melakukan pemeriksaan jika data bernilai null  --}}
+                                 @isset($row->minat_mengajar)
+                                    @php
+                                        $minat_mengajar = $row->minat_mengajar->first()->mata_pelajaran->mata_pelajaran; 
+                                    @endphp
+                                 @else
+                                    @php
+                                        $minat_mengajar = "Mapel"; 
+                                    @endphp
+                                 @endisset
+                                 {{-- ---------  --}}
 
-                <div class="w-full px-4 mb-10 lg:w-1/4">
-                    <div class="bg-white card rounded-2xl overflow-hidden relative group w-[253px] h-[348px]">
-                        <div class="h-[348px] transition-all transform" style="background-image: url(img/re2.png);">
-                            <div class="bg-second h-[98px] rounded-2xl absolute inset-x-0 bottom-0 text-center">
-                                <h1 class="text-xl font-medium text-black mb-2">Dinda Dwi</h1>
-                                <h5 class="text-lg font-normal text-black mb-0">Kimia - Cibinong</h5>
-                                <h5 class="text-lg font-normal text-black mb-3">Universitas Gunadarma</h5>
-                            </div>
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full"></div>
-                        <div class="absolute z-0 inset-0 bg-second opacity-0 group-hover:opacity-95 transition-all"></div>
-                        <div class="group-hover:-translate-y-3 group-hover:bottom-0 transition-all absolute button-0 left-0 text-black p-4 justify-center content-center">
-                            <h4 class="font-medium mb-1 text-xl text-center opacity-80">Dinda Dwi</h4>
-                            <h3 class="font-normal mb-0 text-lg text-center">Kimia - Cibinong </h3>
-                            <h3 class="font-normal mb-3 text-lg text-center">Universitas Gunadarma</h3>
-                            <div class="justify-center mx-12">
-                                <button class="transition-all text-sm inline-flex rounded-xl mb-28 px-2 py-2 text-center justify-center border border-primary bg-primary" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentcolor">
-                                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                                      </svg>
-                                      Rp. 100.000
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                 <h5 class="text-lg font-normal text-black mb-0">{{ ucwords(strtolower($minat_mengajar)) }} - {{ ucwords(strtolower($row->kabupaten)) }}</h5>
+                                 <h5 class="text-lg font-normal text-black mb-3">{{ $row->universitas }}</h5>
+                             </div>
+                         </div>
+                         <div class="absolute bottom-0 left-0 w-full"></div>
+                         <div class="absolute z-0 inset-0 bg-primaryYellow opacity-0 group-hover:opacity-100 transition-all"></div>
+                         <div class="group-hover:-translate-y-3 group-hover:bottom-0 transition-all absolute button-0 left-0 text-black p-4 justify-center content-center">
+                             <h4 class="font-medium mb-1 text-xl text-center opacity-80">Angelina</h4>
+                             <h3 class="font-normal mb-0 text-lg text-center">{{ ucwords(strtolower($minat_mengajar)) }} - {{ ucwords(strtolower($row->kabupaten)) }}</h3>
+                             <h3 class="font-normal mb-3 text-lg text-center">{{ $row->universitas }}</h3>
+                             <div class="justify-center mx-12">
+                                 
+                                    {{-- menampilkan keuntungan  --}}
+                                    <a class="transition-all text-sm inline-flex rounded-xl mb-28 px-2 py-2 text-center justify-center border border-primary bg-primary text-semibold" href="{{ route('detail.guru', [encrypt($row->id)]) }}">
+                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentcolor">
+                                         <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                                    </svg>
 
-                <div class="w-full px-4 mb-10 lg:w-1/4">
-                    <div class="bg-white card rounded-2xl overflow-hidden relative group w-[253px] h-[348px]">
-                        <div class="h-[348px] transition-all transform" style="background-image: url(img/re3.png);">
-                            <div class="bg-second h-[98px] rounded-2xl absolute inset-x-0 bottom-0 text-center">
-                                <h1 class="text-xl font-medium text-black mb-2">Asep Suresep</h1>
-                                <h5 class="text-lg font-normal text-black mb-0">Matematika - Jakarta</h5>
-                                <h5 class="text-lg font-normal text-black mb-3">UNJ</h5>
-                            </div>
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full"></div>
-                        <div class="absolute z-0 inset-0 bg-second opacity-0 group-hover:opacity-95 transition-all"></div>
-                        <div class="group-hover:-translate-y-3 group-hover:bottom-0 transition-all absolute button-0 left-0 text-black p-4 justify-center content-center">
-                            <h4 class="font-medium mb-1 text-xl text-center opacity-80">Asep Suresep</h4>
-                            <h3 class="font-normal mb-0 text-lg text-center opacity-80">Matematika - Jakarta</h3>
-                            <h3 class="font-normal mb-3 text-lg text-center opacity-80">UNJ</h3>
-                            <div class="justify-center mx-12">
-                                <button class="transition-all text-sm inline-flex rounded-xl mb-28 px-2 py-2 text-center justify-center border border-primary bg-primary" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentcolor">
-                                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                                      </svg>
-                                      Rp. 100.000
-                                </button>
-                            </div>
-                        </div>
+                                    {{-- harga  --}}
+                                    Rp. {{ number_format($row->harga + ($row->harga * ($keuntungan / 100)), 0, ",", ".") }}
+                                </a>
+                             </div> 
+                         </div>
+                       </div>
                     </div>
-                </div>
-
-                <div class="w-full px-4 mb-10 lg:w-1/4">
-                    <div class="bg-white card rounded-2xl overflow-hidden relative group w-[253px] h-[348px]">
-                        <div class="h-[348px] transition-all transform" style="background-image: url(img/re4.png);">
-                            <div class="bg-second h-[98px] rounded-2xl absolute inset-x-0 bottom-0 text-center">
-                                <h1 class="text-xl font-medium text-black mb-2">Anggunly</h1>
-                                <h5 class="text-lg font-normal text-black mb-0">Fisika - Jogja</h5>
-                                <h5 class="text-lg font-normal text-black mb-3">UGM</h5>
-                            </div>
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full"></div>
-                        <div class="absolute z-0 inset-0 bg-second opacity-0 group-hover:opacity-95 transition-all"></div>
-                        <div class="group-hover:-translate-y-3 group-hover:bottom-0 transition-all absolute button-0 left-0 text-black p-4 justify-center content-center">
-                            <h4 class="font-medium mb-1 text-xl text-center opacity-80">Aggunly</h4>
-                            <h3 class="font-normal mb-0 text-lg text-center opacity-80">Fisika - Jogja</h3>
-                            <h3 class="font-normal mb-3 text-lg text-center opacity-80">UGM</h3>
-                            <div class="justify-center mx-12">
-                                <button class="transition-all text-sm inline-flex rounded-xl mb-28 px-2 py-2 text-center justify-center border border-primary bg-primary" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentcolor">
-                                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                                      </svg>
-                                      Rp. 100.000
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-full px-4 mb-10 lg:w-1/4">
-                    <div class="bg-white card rounded-2xl overflow-hidden relative group w-[253px] h-[348px]">
-                        <div class="h-[348px] transition-all transform" style="background-image: url(img/re5.png);">
-                            <div class="bg-second h-[98px] rounded-2xl absolute inset-x-0 bottom-0 text-center">
-                                <h1 class="text-xl font-medium text-black mb-2">Sofiyan</h1>
-                                <h5 class="text-lg font-normal text-black mb-0">Geografi - Jakarta</h5>
-                                <h5 class="text-lg font-normal text-black mb-3">Universitas Brawijaya</h5>
-                            </div>
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full"></div>
-                        <div class="absolute z-0 inset-0 bg-second opacity-0 group-hover:opacity-95 transition-all"></div>
-                        <div class="group-hover:-translate-y-3 group-hover:bottom-0 transition-all absolute button-0 left-0 text-black p-4 justify-center content-center">
-                            <h4 class="font-medium mb-1 text-xl text-center opacity-80">Sofiyan</h4>
-                            <h3 class="font-normal mb-0 text-lg text-center opacity-80">Geografi - Jakarta</h3>
-                            <h3 class="font-normal mb-3 text-lg text-center opacity-80">Universitas Brawijaya</h3>
-                            <div class="justify-center mx-12">
-                                <button class="transition-all text-sm inline-flex rounded-xl mb-28 px-2 py-2 text-center border border-primary bg-primary" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentcolor">
-                                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                                      </svg>
-                                      Rp. 100.000
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-full px-4 mb-10 lg:w-1/4">
-                    <div class="bg-white card rounded-2xl overflow-hidden relative group w-[253px] h-[348px]">
-                        <div class="h-[348px] transition-all transform" style="background-image: url(img/re6.png);">
-                            <div class="bg-second h-[98px] rounded-2xl absolute inset-x-0 bottom-0 text-center">
-                                <h1 class="text-xl font-medium text-black mb-2">Jejen</h1>
-                                <h5 class="text-lg font-normal text-black mb-0">B. Indo - Semarang</h5>
-                                <h5 class="text-lg font-normal text-black mb-3">UNNES</h5>
-                            </div>
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full"></div>
-                        <div class="absolute z-0 inset-0 bg-second opacity-0 group-hover:opacity-95 transition-all"></div>
-                        <div class="group-hover:-translate-y-3 group-hover:bottom-0 transition-all absolute button-0 left-0 text-black p-4 justify-center content-center">
-                            <h4 class="font-medium mb-1 text-xl text-center opacity-80">Jejen</h4>
-                            <h3 class="font-normal mb-0 text-lg text-center opacity-80">B. Indo - Semarang</h3>
-                            <h3 class="font-normal mb-3 text-lg text-center opacity-80">UNNES</h3>
-                            <div class="justify-center mx-12">
-                                <button class="transition-all text-sm inline-flex rounded-xl mb-28 px-2 py-2 text-center border border-primary bg-primary" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentcolor">
-                                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                                      </svg>
-                                      Rp. 100.000
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-full px-4 mb-10 lg:w-1/4">
-                    <div class="bg-white card rounded-2xl overflow-hidden relative group w-[253px] h-[348px]">
-                        <div class="h-[348px] transition-all transform" style="background-image: url(img/re7.png);">
-                            <div class="bg-second h-[98px] rounded-2xl absolute inset-x-0 bottom-0 text-center">
-                                <h1 class="text-xl font-medium text-black mb-2">Jhonny</h1>
-                                <h5 class="text-lg font-normal text-black mb-0">PPKN - Surabaya</h5>
-                                <h5 class="text-lg font-normal text-black mb-3">ITS</h5>
-                            </div>
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full"></div>
-                        <div class="absolute z-0 inset-0 bg-second opacity-0 group-hover:opacity-95 transition-all"></div>
-                        <div class="group-hover:-translate-y-3 group-hover:bottom-0 transition-all absolute button-0 left-0 text-black p-4 justify-center content-center">
-                            <h4 class="font-medium mb-1 text-xl text-center opacity-80">Jhonny</h4>
-                            <h3 class="font-normal mb-0 text-lg text-center opacity-80">PPKN - Surabaya</h3>
-                            <h3 class="font-normal mb-3 text-lg text-center opacity-80">ITS</h3>
-                            <div class="justify-center mx-12">
-                                <button class="transition-all text-sm inline-flex rounded-xl mb-28 px-2 py-2 text-center border border-primary bg-primary" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentcolor">
-                                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                                      </svg>
-                                      Rp. 100.000
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="w-full px-4 mb-10 lg:w-1/4">
-                    <div class="bg-white card rounded-2xl overflow-hidden relative group w-[253px] h-[348px]">
-                        <div class="h-[348px] transition-all transform" style="background-image: url(img/re8.png);">
-                            <div class="bg-second h-[98px] rounded-2xl absolute inset-x-0 bottom-0 text-center">
-                                <h1 class="text-xl font-medium text-black mb-2">Mahamud</h1>
-                                <h5 class="text-lg font-normal text-black mb-0">IPS - Bandung</h5>
-                                <h5 class="text-lg font-normal text-black mb-3">Universitas Padjajaran</h5>
-                            </div>
-                        </div>
-                        <div class="absolute bottom-0 left-0 w-full"></div>
-                        <div class="absolute z-0 inset-0 bg-second opacity-0 group-hover:opacity-95 transition-all"></div>
-                        <div class="group-hover:-translate-y-3 group-hover:bottom-0 transition-all absolute button-0 left-0 text-black p-4 justify-center content-center">
-                            <h4 class="font-medium mb-1 text-xl text-center opacity-80">Mahamud</h4>
-                            <h3 class="font-normal mb-0 text-lg text-center opacity-80">IPS - Bandung</h3>
-                            <h3 class="font-normal mb-3 text-lg text-center opacity-80">Universitas Padjajaran</h3>
-                            <div class="justify-center mx-12">
-                                <button class="transition-all text-sm inline-flex rounded-xl mb-28 px-2 py-2 text-center border border-primary bg-primary" href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentcolor">
-                                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                                      </svg>
-                                      Rp. 100.000
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                @endisset
             </div>
 
             <div class="flex items-center justify-center">
-                <button class="text-base border border-primary bg-primary px-4 py-2 text-center text-white rounded-lg mb-16" href="#">Lihat lebih banyak</button>
+                <a href="{{ route('daftar.guru') }}" class="text-base border border-primary bg-primary px-4 py-2 text-center text-white rounded-lg mb-16">Lihat lebih banyak</a>
             </div>
 
         </div>
@@ -956,7 +798,6 @@
     </footer>
     <!-- footer section end -->
 
-
-    <script src="/js/sscript.js"></script>
+    {{-- <script src="/js/sscript.js"></script> --}}
 
 @endsection

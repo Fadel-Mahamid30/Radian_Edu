@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Confirm;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -33,8 +34,29 @@ class RegisterController extends Controller
     // fungsi yang digunakan untuk menampilkan form registrasi
     public function form_registrasi(){
         return view("auth.register", [
-            "title" => "Register"
+            "title" => "Radian Edu"
         ]);
+    }
+
+
+    // fungsi untuk insert data user
+    function insert_user($data){
+        $insert_user = DB::transaction(function () use ($data){
+            try {
+
+                $user = User::create($data);
+                $user->assignRole("user");
+                DB::commit();
+                return true;
+
+            } catch (\Throwable $th) {
+
+                DB::rollBack();
+                return false;
+
+            }
+        });
+        return $insert_user;
     }
 
     // fungsi yang digunakan untuk melakukan registrasi
@@ -47,22 +69,20 @@ class RegisterController extends Controller
             "password" => "required|min:6|max:255"
         ], $this->massage);
 
-        try {
+        $data_user = [
+            "nama" => $request->nama,
+            "email" => $request->email,
+            "no_telepon" => $request->no_telepon,
+            "password" => Hash::make($request->password)
+        ];
 
-            $password = Hash::make($request->password);
-            $user = User::create([
-                "nama" => $request->nama,
-                "email" => $request->email,
-                "no_telepon" => $request->no_telepon,
-                "password" => $password
-            ]);
+        // memanggil fungsi insert user 
+        $insert_user = $this->insert_user($data_user);
 
+        if($insert_user){
             return redirect()->route("login")->with("success", "Registrasi berhasil, sekarang anda bisa login");
-
-        } catch (\Throwable $th) {
-
-            return redirect()->route("register")->with("failed", "Registrasi gagal, mohon untuk registrasi ulang.");
-            
+        }else{
+            return redirect()->route("registrasi")->with("failed", "Registrasi gagal, mohon untuk registrasi ulang.");
         }
 
     }

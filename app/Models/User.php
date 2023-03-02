@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;                                                      
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -80,5 +81,39 @@ class User extends Authenticatable
 
     public function domisili_mengajar(){
         return $this->hasMany(TeachingDomicile::class, "user_id");
+    }
+
+
+    public function scopeCariGuru($query, Array $cari){
+
+        // mencari domisili
+        $query->when($cari["domisili"] ?? false, function($query, $domisili){
+                return $query->whereHas("domisili_mengajar.kecamatan", function($query) use ($domisili){
+                    $query->where("name", "like", "%" . $domisili . "%")
+                    ->orWhereHas("regency", function($query) use ($domisili){
+                        $query->where("name", "like", "%" . $domisili . "%");
+                    })
+                    ->orWhereHas("regency.province", function($query) use ($domisili){
+                        $query->where("name", "like", "%" . $domisili . "%");
+                    });
+                });
+            });
+
+        // mencari mata pelajaran
+        $query->when($cari["mata_pelajaran"] ?? false, function($query, $mata_pelajaran){
+            return $query->whereHas("minat_mengajar.mata_pelajaran", function($query) use ($mata_pelajaran){
+                $query->where("mata_pelajaran", "like", "%" . $mata_pelajaran . "%")
+                    ->orWhereHas("tingkatan", function($query) use ($mata_pelajaran){
+                        $query->where("tingkatan", "like", "%" . $mata_pelajaran . "%");
+                    });
+                });
+                
+            });
+        
+        // hanya yang memiliki role user saja
+        $query->whereHas("roles", function($query){
+                return $query->where("name", "user");
+            });
+            
     }
 }

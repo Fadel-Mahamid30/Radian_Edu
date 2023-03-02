@@ -17,8 +17,8 @@ class KontakSeeder extends Seeder
     {
         Contact::create([
             "email" => "fadelmahamid107@gmail.com",
-            "kontak_micro_teaching" => "085795221587",
-            "kontak_pesan_guru" => "085795221587"
+            "kontak_micro_teaching" => "085158955369",
+            "kontak_pesan_guru" => "085158955369"
         ]);
     }
 }

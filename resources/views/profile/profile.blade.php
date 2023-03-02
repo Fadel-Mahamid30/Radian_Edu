@@ -1,28 +1,29 @@
-@extends('template.template')
+@extends('profile.layout.template')
 @section('content')
 
 <section class="text-gray-600 body-font font-poppins overflow-hidden bg-white">
 
     
-<div class="container px-5 py-9 mx-auto max-w-[1120px] pt-32 pb-28">
+<div class="container px-5 py-9 mx-auto max-w-[1120px] pt-12 8x75:pt-28 pb-12 8x75:pb-28">
         
-    <div class="w-full h-[200px] 8x75:h-[300px] bg-primary absolute top-0 right-0 z-0" style="background-image: url('/img/');"></div>
+    <div class="w-full h-[200px] 8x75:h-[300px] bg-primary absolute top-0 right-0 z-0 bg-cover bg-center" style="background-image: url({{ asset('/img/profile/profil_hero.png') }});"></div>
 
     <div class="my-8 flex flex-col notebook:block z-50 relative">
-        <div class="w-full flex flex-col 8x75:flex-row justify-center 8x75:justify-between  z-50 mb-32 relative">
-            <div class="flex flex-col 8x75:flex-row items-center 8x75:items-start w-[70%]">
-                <div class="w-[200px] h-[200px] mr-7 overflow-hidden items-center justify-center rounded-full">
-                    <img src="{{ asset('storage/' . $user->foto) }}" alt="" class="w-full">
+        <div class="w-full flex flex-col 8x75:flex-row justify-center 8x75:justify-between z-50 8x75:mb-32 mb-24 relative">
+            <div class="flex flex-col 8x75:flex-row items-center 8x75:items-start w-full 8x75:w-[70%]">
+                <div class="bg-cover bg-top w-[200px] h-[200px] mr-0 8x75:mr-7 overflow-hidden justify-center rounded-full">
+                    <img src="{{ asset('storage/' . $user->foto) }}" class="h-full w-full object-cover" alt="">
                 </div>
     
-                <div class="max-w-[350px]">
-                    <h1 class="text-4xl max-w-[350px] overflow-hidden max-h-[80px] font-semibold text-white mt-2">{{ $user->nama }}</h1>
-                    <p class="text-base max-w-[350px] overflow-hidden max-h-[24px] font-medium text-white mt-2">{{ $user->email }}</p>
+                <div class="mt-4 8x75:mt-0 w-full 8x75:max-w-[350px]">
+                    <h1 class="text-4xl 8x75:max-w-[350px] overflow-hidden 8x75:max-h-[80px] font-semibold text-black text-center 8x75:text-left 8x75:text-white mt-2">{{ $user->nama }}</h1>
+                    <p class="text-base 8x75:max-w-[350px] overflow-hidden 8x75:max-h-[24px] font-medium text-black text-center 8x75:text-left 8x75:text-white mt-2">{{ $user->email }}</p>
+                    <p class="text-base 8x75:max-w-[350px] overflow-hidden 8x75:max-h-[24px] font-medium text-black text-center 8x75:text-left 8x75:text-white mt-1">{{ $user->kegiatan_mengajar }}</p>
                 </div>
             </div>
 
-            <div class="w-fit">
-                <a href="#" class="justify-center rounded-md px-4 py-2 bg-primaryYellow flex flex-row max-w-[200px] max-h-[50px] items-center">
+            <div class="w-full 8x75:w-fit 8x75:flex-col flex justify-center 8x75:justify-between items-center 8x75:items-start mt-6 8x75:mt-0">
+                <a href="{{ route('profile.edit') }}" class="justify-center rounded-md px-4 py-2 bg-primaryYellow flex flex-row max-w-[200px] max-h-[50px] items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-[35px] h-[35px] fill-black mr-4">
                         <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
                         <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
@@ -32,41 +33,18 @@
             </div>
         </div>
 
-        {{-- <div class="w-full flex flex-col justify-center items-center z-50 mb-32 relative">
-            <div class="flex flex-col items-center w-full">
-                <div class="w-[200px] h-[200px] overflow-hidden items-center justify-center rounded-full">
-                    <img src="{{ asset('storage/' . $user->foto) }}" alt="" class="w-full">
-                </div>
-    
-                <div class="mt-4">
-                    <h1 class="text-4xl text-center overflow-hidden font-semibold mt-2">{{ $user->nama }}</h1>
-                    <p class="text-base text-center overflow-hidden font-medium mt-2">{{ $user->email }}</p>
-                </div>
-            </div>
-
-            <div class="w-full flex-col flex items-center mt-6">
-                <a href="#" class="justify-center rounded-md px-4 py-2 bg-primaryYellow flex flex-row max-w-[200px] max-h-[50px] items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-[35px] h-[35px] fill-black mr-4">
-                        <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
-                        <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
-                    </svg>
-                    <span class="text-black text-base font-semibold">Edit Profil</span>
-                </a>
-            </div>
-        </div> --}}
-
         {{-- Profil guru  --}}
-        <h1 class="text-[32px] mb-4 font-semibold ">Profil Guru</h1>
+        <h1 class="text-[32px] mb-4 font-semibold text-black">Profil Guru</h1>
         <hr class="h-[1px] bg-primaryInp w-full mb-[22px]">
         <div class="flex flex-wrap notebook:flex-nowrap justify-between mb-[90px]">
             <div class="flex-grow notebook:max-w-[48%]">
-                <p class="text-xl font-medium mb-[22px]">Deskripsi Guru</p>
+                <p class="text-xl font-medium mb-[22px] text-black">Deskripsi Guru</p>
                 <p class="text-base mb-[22px] text-bodyText">
                     {{ $user->deskripsi_diri }}
                 </p>
             </div>
             <div class="flex-grow notebook:max-w-[48%]">
-                <p class="text-xl font-medium mb-[22px]">Contact</p>
+                <p class="text-xl font-medium mb-[22px] text-black">Contact</p>
                 <p class="text-base mb-[22px] text-bodyText">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Est iusto minima iure quisquam, eos quasi hic quod porro, quis eveniet 
                     odio nulla tenetur quia repellat distinctio ipsum animi eligendi consequatur veniam fugiat quo itaque. Architecto magnam saepe 
@@ -76,14 +54,14 @@
         </div>
 
         {{-- Pendidikan --}}
-        <h1 class="text-[32px] mb-4 font-semibold ">Pendidikan</h1>
+        <h1 class="text-[32px] mb-4 font-semibold text-black">Pendidikan</h1>
         <hr class="h-[1px] bg-primaryInp w-full mb-[22px]">
         <div class="flex flex-wrap notebook:flex-nowrap justify-between mb-[90px]">
             <div class="flex-grow notebook:max-w-[48%]"></div>
             <div class="flex-grow notebook:max-w-[48%]">
                 <div class="flex flex-row w-full">
-                    <div class="mr-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9 sm:w-12 sm:h-12">
+                    <div class="mr-0 sm:mr-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9 sm:w-12 sm:h-12 fill-black hidden sm:block">
                             <path d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
                         </svg>
                     </div>
@@ -94,7 +72,7 @@
                             </p>
                         </div>
         
-                        <h1 class="text-[32px] font-bold mb-1">
+                        <h1 class="text-[32px] font-bold mb-1 text-black">
                             {{ $user->universitas }}
                         </h1>
         
@@ -107,7 +85,7 @@
         </div>
       
         {{-- Pengalaman --}}
-        <h1 class="text-[32px] mb-4 font-semibold ">Pengalaman</h1>
+        <h1 class="text-[32px] mb-4 font-semibold text-black">Pengalaman</h1>
         <hr class="h-[1px] bg-primaryInp w-full mb-[22px]">
         <div class="flex flex-wrap notebook:flex-nowrap justify-between mb-[90px]">
             <div class="flex-grow notebook:max-w-[48%]"></div>
@@ -115,8 +93,8 @@
                 @if($user->pengalaman)
                     @foreach ($user->pengalaman as $row)
                         <div class="flex flex-row w-full mb-7">
-                            <div class="mr-5">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9 sm:w-12 sm:h-12">
+                            <div class="mr-0 sm:mr-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-9 h-9 sm:w-12 sm:h-12 fill-black hidden sm:block">
                                     <path d="M12.378 1.602a.75.75 0 00-.756 0L3 6.632l9 5.25 9-5.25-8.622-5.03zM21.75 7.93l-9 5.25v9l8.628-5.032a.75.75 0 00.372-.648V7.93zM11.25 22.18v-9l-9-5.25v8.57a.75.75 0 00.372.648l8.628 5.033z" />
                                 </svg>
                             </div>
@@ -127,7 +105,7 @@
                                     </p>
                                 </div>
                 
-                                <h1 class="text-[32px] font-bold mb-1">
+                                <h1 class="text-[32px] font-bold mb-1 text-black">
                                     {{ $row->perusahaan }}
                                 </h1>
                 
@@ -142,7 +120,7 @@
         </div>
 
         {{-- Minat Mengajar --}}
-        <h1 class="text-[32px] mb-4 font-semibold ">Minat Mengajar</h1>
+        <h1 class="text-[32px] mb-4 font-semibold text-black">Minat Mengajar</h1>
         <hr class="h-[1px] bg-primaryInp w-full mb-[22px]">
         <div class="flex flex-wrap notebook:flex-nowrap justify-between mb-[90px]">
             <div class="flex-grow notebook:max-w-[60%]">
@@ -160,7 +138,7 @@
         </div>
   
         {{-- Domisili Mengajar --}}
-        <h1 class="text-[32px] mb-4 font-semibold ">Domisili Mengajar</h1>
+        <h1 class="text-[32px] mb-4 font-semibold text-black">Domisili Mengajar</h1>
         <hr class="h-[1px] bg-primaryInp w-full mb-[22px]">
         <div class="flex flex-wrap notebook:flex-nowrap justify-between mb-[90px]">
             <div class="flex-grow notebook:max-w-[60%]">
@@ -176,6 +154,20 @@
             </div>
             <div class="flex-grow notebook:max-w-[40%]"></div>
         </div>
+
+        {{-- logout --}}
+        <div class="w-full flex justify-end">
+            <form action="{{ route('logout') }}" class="w-fit" method="post">
+                @csrf
+                <button type="submit" class="justify-center rounded-md px-4 py-2 bg-primarySD flex flex-row max-w-[200px] max-h-[50px] items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-[35px] h-[35px] stroke-white mr-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                    </svg>
+                    <span class="text-white text-base font-semibold">Log Out</span>
+                </button>
+            </form>
+        </div>
+
     </div>
 </div>
 </section>

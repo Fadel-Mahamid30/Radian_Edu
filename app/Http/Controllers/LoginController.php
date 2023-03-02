@@ -10,7 +10,7 @@ class LoginController extends Controller
     // fungsi yang digunakan untuk menampilkan form login
     public function form_login(){
         return view("auth.login", [
-            "title" => "Login"
+            "title" => "Radian Edu"
         ]);
     }
 

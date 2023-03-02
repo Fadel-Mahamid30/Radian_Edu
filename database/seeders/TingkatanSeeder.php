@@ -16,13 +16,15 @@ class TingkatanSeeder extends Seeder
      */
     public function run()
     {
-        EducationalLevel::create([
+
+        // tingkatan 
+        $tk = EducationalLevel::create([
                 "tingkatan" => "TK"
             ]);
-        EducationalLevel::create([
+        $sd = EducationalLevel::create([
                 "tingkatan" => "SD"
             ]);
-        EducationalLevel::create([
+        $smp = EducationalLevel::create([
                 "tingkatan" => "SMP"
             ]);
         
@@ -30,49 +32,49 @@ class TingkatanSeeder extends Seeder
         //-- TK
         Subjects::create([
                 "mata_pelajaran" => "Tematik",
-                "tingkatan_id" => 1
+                "tingkatan_id" => $tk->id
             ]);
 
         Subjects::create([
                 "mata_pelajaran" => "Membaca",
-                "tingkatan_id" => 1
+                "tingkatan_id" => $tk->id
             ]);
 
         Subjects::create([
                 "mata_pelajaran" => "Mengaji",
-                "tingkatan_id" => 1
+                "tingkatan_id" => $tk->id
             ]);
 
         //---- SD
         Subjects::create([
                 "mata_pelajaran" => "Tematik",
-                "tingkatan_id" => 2
+                "tingkatan_id" => $sd->id
             ]);
 
         Subjects::create([
                 "mata_pelajaran" => "Matematika",
-                "tingkatan_id" => 2
+                "tingkatan_id" => $sd->id
             ]);
 
         Subjects::create([
                 "mata_pelajaran" => "Bahasa Indonesia",
-                "tingkatan_id" => 2
+                "tingkatan_id" => $sd->id
             ]);
 
         //---- SMP
         Subjects::create([
                 "mata_pelajaran" => "Matematika",
-                "tingkatan_id" => 3
+                "tingkatan_id" => $smp->id
             ]);
 
         Subjects::create([
                 "mata_pelajaran" => "Bahasa Inggris",
-                "tingkatan_id" => 3
+                "tingkatan_id" => $smp->id
             ]);
 
         Subjects::create([
                 "mata_pelajaran" => "IPA",
-                "tingkatan_id" => 3
+                "tingkatan_id" => $smp->id
             ]);
     }
 }

@@ -173,7 +173,7 @@ class BiodataController extends Controller
         $this->authorize("is_profile_complete_no", $user);
 
         return view("biodata.biodata_step1",[
-            "title" => "Biodata"
+            "title" => "Radian Edu"
         ]);
     }
 
@@ -202,7 +202,7 @@ class BiodataController extends Controller
         ];
 
         return view("biodata.biodata_step2",[
-            "title" => "Biodata",
+            "title" => "Radian Edu",
             "user" => $user,
             "provinsi" => Province::all(),
             "tingkatan" => EducationalLevel::all(),
@@ -415,7 +415,7 @@ class BiodataController extends Controller
             }
 
             return view("biodata.biodata_step3",[
-                "title" => "Biodata"
+                "title" => "Radian Edu"
             ]);
 
         } catch (\Throwable $th) {
